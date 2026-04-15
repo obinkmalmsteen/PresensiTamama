@@ -17,7 +17,7 @@
 @section('content')
 <div class="row">
     <div class="col">
-        <div class="row" style="margin-top: 70px">
+        <div class="row" style="margin-top: 60px">
             <div class="col-8">
                 <div class="form-group">
                     <select name="bulan" id="bulan" class="form-control selectmaterialize" >

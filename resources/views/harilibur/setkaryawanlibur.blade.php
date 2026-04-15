@@ -77,7 +77,7 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        
+                                        <tbody id="loadkaryawanlibur"></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -108,6 +108,14 @@
 @push('myscript')
 <script>
     $(function(){
+
+        function loadkaryawanlibur(){
+            var kode_libur = "{{ $harilibur->kode_libur}}";
+            $("#loadkaryawanlibur").load('/konfigurasi/harilibur/' + kode_libur + '/getkaryawanlibur');
+        }
+        
+        loadkaryawanlibur();
+
         $("#btnsetkaryawanlibur").click(function(e){
 
             var kode_libur = "{{ $harilibur->kode_libur}}";

@@ -16,7 +16,7 @@
           <!-- Page pre-title -->
           
           <h2 class="page-title">
-            Monitoring Presensi
+            Monitoring Presensi All
           </h2>
         </div> 
       </div>
@@ -90,29 +90,32 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
+                          <div class="table-responsive">
                             <table class="table table-stripped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Status</th>
-                                        <th>NIK</th>
-                                        <th>Nama Karyawan</th>
-                                        <th>Cabang</th>
-                                        <th>Divisi</th>
-                                        <th>Jadwal</th>
-                                        <th>Jam Masuk</th>
-                                        <th>Foto In</th>
-                                        <th>Jam Pulang</th>
-                                        <th>Foto Out</th>
-                                        <th>Ket</th>
-                                        <th>Location</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="loadpresensi">
+                              <thead>
+                                  <tr>
+                                      <th>No.</th>
+                                      <th>Status</th>
+                                      <th>NIK</th>
+                                      <th>Nama Karyawan</th>
+                                      <th>Cabang</th>
+                                      <th>Divisi</th>
+                                      <th>Jadwal</th>
+                                      <th>Jam Masuk</th>
+                                      <th>Foto In</th>
+                                      <th>Jam Pulang</th>
+                                      <th>Foto Out</th>
+                                      <th>Ket</th>
+                                      <th>Location</th>
+                                      <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="loadpresensi">
 
-                                </tbody>
-                            </table>
+                              </tbody>
+                          </table>
+                          </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -151,7 +151,16 @@
                                 <td>{{$d->jabatan}}</td>
                                 <td>{{$d->kode_dept}}</td>
                                 <td>{{$d->kode_cabang}}</td>
-                                <td>{{$d->status == "i" ? "izin" : "sakit"}}</td>
+                                <td>
+                                    @if ($d->status == "i")
+                                    <span >Izin</span>
+                                    @elseif ($d->status == "c")
+                                    <span >Cuti</span>
+                                    @else
+                                    <span >Sakit</span>
+                                    @endif
+                                </td>
+                                
                                 <td>{{$d->keterangan}}</td>
                                 
                                 <td>

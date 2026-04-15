@@ -14,41 +14,39 @@
     <!-- * App Header -->
 <style>
     .webcam-capture,
-    .webcam-capture video{
+    .webcam-capture video {
         display: inline-block;
         width: 100% !important;
         margin: auto;
-        height: auto !important;
+        height: 400px !important; /* Sesuaikan tinggi yang diinginkan */
         border-radius: 15px;
+        transform: scaleX(-1); /* Membalikkan tampilan video secara horizontal */
     }
+
     #map { 
         height: 280px; 
-        }
+    }
 
+    .jam-digital-malasngoding {
+        background-color: #5b5b5b83;
+        position: absolute;
+        top: 65px;
+        right: 10px;
+        z-index: 9999;
+        width: 140px;
+        border-radius: 10px;
+        padding: 5px;
+    }
 
-        .jam-digital-malasngoding {
- 
- background-color: #5b5b5b83;
- position: absolute;
- top: 65px;
- right: 10px;
- z-index: 9999;
- width: 140px;
- border-radius: 10px;
- padding: 5px;
-}
-
-
-
-.jam-digital-malasngoding p {
- color: #fff;
- font-size: 14px;
- text-align: left;
- margin-top: 0;
- margin-bottom: 0;
-}
-
+    .jam-digital-malasngoding p {
+        color: #fff;
+        font-size: 14px;
+        text-align: left;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 </style>
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 @endsection
@@ -91,7 +89,7 @@
     </div>
 </div>
 
-<div class="row mt-2">
+<div class="row mt-1">
     <div class="col">
         <div id="map"></div>
     </div>  
@@ -177,48 +175,52 @@ var circle = L.circle([lat_kantor, long_kantor], {
 function errorCallback(){
 
 }
-$("#takeabsen").click(function(e){
-    Webcam.snap(function(uri){
+      $("#takeabsen").click(function(e){
+        Webcam.snap(function(uri){
         image = uri;
-    });
-    var lokasi = $("#lokasi").val();
-    $.ajax({
-        type:'POST',
-        url:'/presensi/store',
-        data:{
-            _token:"{{csrf_token() }}",
-            image:image,
-            lokasi:lokasi
-        },
-        cache:false,
-        success: function(respond){
-            var status = respond.split("|");
-            if(status[0] == "success"){
-                if(status[2]== "in"){
+        });
+        var lokasi = $("#lokasi").val();
+        $.ajax({
+            type:'POST',
+            url:'/presensi/store',
+            data:{
+                _token:"{{csrf_token() }}",
+                image:image,
+                lokasi:lokasi,
+                kode_jam_kerja:"{{ $kode_jam_kerja }}"
+                },
+            cache:false,
+            success: function(respond){
+            var status = respond.split("|").map(function(item) {
+                return item.trim(); // Memberikan trim pada setiap elemen hasil split
+            });
+                if (status[0] === "sukses") {
+                if (status[2] === "masuk") {
                     notifikasi_in.play();
-                }else{
-                    notifikasi_out.play();
+                } else if (status[2] === "keluar") {
+                    notifikasi_out.play(); // Memainkan suara untuk absen keluar
                 }
+
                 Swal.fire({
                     title: 'Berhasil!',
                     text: status[1],
-                    icon: 'success',
-                })
-                setTimeout("location.href='/dashboard'", 3000);
-            }  else {
-               
-                if(status[2]== "radius"){
+                    icon: 'success'
+                });
+            } else {
+                if (status[2] === "radius") {
                     radius_sound.play();
                 }
                 Swal.fire({
-                title: 'Error!',
-                text: status[1],
-                icon: 'error',
-            })
-           
+                    title: 'Error!',
+                    text: status[1],
+                    icon: 'error'
+                });
             }
-        }
-    });
-});
+                setTimeout("location.href='/dashboard'", 3000);
+                }
+            });
+
+
+        });
 </script>
 @endpush

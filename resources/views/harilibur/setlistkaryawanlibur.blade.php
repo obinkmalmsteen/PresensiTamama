@@ -10,7 +10,18 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            
+            <tbody id="loadsetlistkaryawanlibur"></tbody>
         </table>
     </div>
 </div>
+
+<script>
+    $(function(){
+        function loadsetlistkaryawanlibur(){
+            var kode_libur = "{{$kode_libur}}";
+            $("#loadsetlistkaryawanlibur").load('/konfigurasi/harilibur/' + kode_libur + '/getsetlistkaryawanlibur');
+        }
+        loadsetlistkaryawanlibur();
+
+    });
+</script>

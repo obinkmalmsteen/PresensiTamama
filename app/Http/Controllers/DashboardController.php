@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
    public function index()
    {
+   
+
+    
+
     $hariini = date("Y-m-d");
     $bulanini = date("m") * 1;
     $tahunini = date("Y");
@@ -45,6 +50,10 @@ class DashboardController extends Controller
     ->get();
     $namabulan = ["","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 
+    $beritas = DB::table('berita')->orderBy('tanggal_berita', 'desc')->take(5)->get();
+    // Menambahkan path gambar
+
+
     $rekapizin = DB::table('pengajuan_izin')
     ->selectRaw('SUM(IF(status="i",1,0))as jmlizin,SUM(IF(status="s",1,0))as jmlsakit')
     ->where('nik', $nik)
@@ -52,7 +61,10 @@ class DashboardController extends Controller
     ->whereRaw('YEAR(tgl_izin_dari)="'.$tahunini.'"')
     ->where('status_approved',1)
     ->first();
-    return view('dashboard.dashboard', compact('presensihariini','historibulanini','namabulan','bulanini','tahunini','rekappresensi','leaderboard'));
+    return view('dashboard.dashboard', compact('presensihariini','historibulanini','namabulan','bulanini','tahunini','rekappresensi','leaderboard','beritas'));
+
+   
+
    }
    public function dashboardadmin()
    {

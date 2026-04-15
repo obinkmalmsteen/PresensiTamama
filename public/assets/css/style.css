@@ -355,7 +355,7 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #e1e1e1;
+  border-top: 1px solid #b5adad;
   padding-left: 4px;
   padding-right: 4px;
   padding-bottom: env(safe-area-inset-bottom);
@@ -408,26 +408,24 @@ button:focus {
 .appBottomMenu .item i.icon,
 .appBottomMenu .item ion-icon {
   display: inline-flex;
-  margin: 1px auto 3px auto;
   font-size: 26px;
   line-height: 1em;
-  color: #141515;
+  color: #595959;
   transition: 0.1s all;
-  display: block;
   margin-top: 1px;
   margin-bottom: 3px;
 }
 
 .appBottomMenu .item .action-button {
   display: inline-flex;
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   margin-left: -5px;
   margin-right: -5px;
   align-items: center;
   justify-content: center;
   border-radius: 200px;
-  background: #1e74fd;
+  background: #0d16bf;
 }
 
 .appBottomMenu .item .action-button.large {
@@ -448,7 +446,7 @@ button:focus {
 .appBottomMenu .item strong {
   margin-top: 4px;
   display: block;
-  color: #141515;
+  color: #4f5252;
   font-weight: 400;
   transition: 0.1s all;
 }
@@ -457,15 +455,23 @@ button:focus {
   opacity: 0.8;
 }
 
-.appBottomMenu .item.active:before {
+.appBottomMenu .itemactive:before {
   background: transparent;
 }
 
-.appBottomMenu .item.active i.icon,
-.appBottomMenu .item.active ion-icon,
-.appBottomMenu .item.active strong {
-  color: #1e74fd !important;
+.appBottomMenu .itemactive i.icon,
+.appBottomMenu .itemactive ion-icon {
+  color: #b90b0b !important;
+  font-size: 26px; /* Tetapkan ukuran font yang sama */
+  margin-top: 1px;
+  margin-bottom: 3px;
+}
+
+.appBottomMenu .itemactive strong {
+  color: #b90b0b !important;
   font-weight: 500;
+  font-size: 9px; /* Tetapkan ukuran font yang sama */
+  margin-top: 4px;
 }
 
 .appBottomMenu .item:hover i.icon,
@@ -489,13 +495,13 @@ button:focus {
   color: #fff;
 }
 
-.appBottomMenu.text-light .item.active {
+.appBottomMenu.text-light .itemactive {
   opacity: 1;
 }
 
-.appBottomMenu.text-light .item.active i.icon,
-.appBottomMenu.text-light .item.active ion-icon,
-.appBottomMenu.text-light .item.active strong {
+.appBottomMenu.text-light .itemactive i.icon,
+.appBottomMenu.text-light .itemactive ion-icon,
+.appBottomMenu.text-light .itemactive strong {
   color: #fff !important;
 }
 
@@ -3593,7 +3599,7 @@ a.badge-dark {
 .dropdown .dropdown-menu .dropdown-item:active,
 .dropup .dropdown-menu .dropdown-item:hover,
 .dropup .dropdown-menu .dropdown-item:active {
-  background: rgba(225, 225, 225, 0.5);
+  background: rgb(41, 95, 211);
   color: #141515;
 }
 
@@ -8001,9 +8007,10 @@ body.dark-mode-active .cart-item .cart-item-footer {
 }
 
 #user-section {
-  height: 180px;
-  background-color: #c20000;
+  height: 220px; /* obink tinggi  header    */
+  background: linear-gradient(to bottom, #22114A, #155F94); /* Obink Gradasi dari hijau ke hijaukebiruan untuk bagian  header */
   padding: 20px;
+  
 }
 
 #user-detail {
@@ -8012,20 +8019,22 @@ body.dark-mode-active .cart-item .cart-item-footer {
 }
 
 #user-info {
-  margin-left: 30px !important;
+  
+  margin-left: 30px !important; /* obink warna tulisan nama user di header    */
   line-height: 2px;
 }
 #user-name {
-  color: white;
+  color: #FFFFFF;
 }
 #user-role {
-  color: white;
+  color: #FFFFFF;
 }
 
 #menu-section {
+/*  background: #ffffff; obink warna kolom berita    */
   position: absolute;
   width: 100%;
-  top: 120px;
+  top: 150px;      /* obink jarak kolom berita dari atas    */
   z-index: 999;
 }
 
@@ -8038,18 +8047,19 @@ body.dark-mode-active .cart-item .cart-item-footer {
   position: absolute;
   top: 150px;
   width: 100%;
-  background-color: #f2f2f2;
-  border-radius: 10px 10px 0px 0px;
+  background-color: #F2F7F7; /* obink warna kolom absen    */
+  border-radius: 15px 15px 0px 0px;
 }
 
 .todaypresence {
-  margin-top: 90px;
+  margin-top: 130px;  /* obink jarak kolom absen dari atas    */
   margin-bottom: 20px;
 }
 
 .presencecontent {
   display: flex;
   justify-content: space-evenly;
+   height: 80px;
 }
 
 .gradasigreen {
@@ -8057,7 +8067,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
   background-image: linear-gradient(
     to bottom right,
     rgba(21, 189, 74, 1),
-    rgba(21, 189, 74, 0.8)
+    rgba(0, 149, 79, 1)
   );
 }
 

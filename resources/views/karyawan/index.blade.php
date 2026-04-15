@@ -103,17 +103,25 @@
                                             <th>Foto</th>
                                             <th>Cabang</th>
                                             <th>Divisi</th>
+                                            <th>
+                                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-cog"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.002 9" /><path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19.001 15.5v1.5" /><path d="M19.001 21v1.5" /><path d="M22.032 17.25l-1.299 .75" /><path d="M17.27 20l-1.3 .75" /><path d="M15.97 17.25l1.3 .75" /><path d="M20.733 20l1.3 .75" /><path d="M12 7v5l2 2" /></svg>
+                                            </th>
+                                            <th>
+                                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-map-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" /><path d="M9 4v13" /><path d="M15 7v5.5" /><path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" /><path d="M19 18v.01" /></svg>
+                                            </th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($karyawan as $d)
                                         @php
+                                   
+
                                             $path = Storage::url('uploads/karyawan/'.$d->foto);
                                         @endphp
                                         <tr>
                                             <td>{{ $loop->iteration + $karyawan->firstItem()-1 }}</td>
-                                            <td>{{$d->nik}}</td>
+                                            <td>{{ sprintf("%08d", $d->nik) }}</td>
                                             <td>{{$d->nama_lengkap}}</td>
                                             <td>{{$d->jabatan}}</td>
                                             <td>{{$d->no_hp}}</td>
@@ -126,15 +134,46 @@
                                             </td>
                                             <td>{{$d->kode_cabang}}</td>
                                             <td>{{$d->nama_dept}}</td>
+                                            <td class="text-center">
+                                                @if ($d->status_jam_kerja == 1)
+                                                <a href="/karyawan/{{ $d->nik }}/lockandunlockjamkerja"> 
+                                                    <span class="badge bg-light badge-sm">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5.633 5.64a9 9 0 1 0 12.735 12.72m1.674 -2.32a9 9 0 0 0 -12.082 -12.082" /><path d="M12 7v1" /><path d="M3 3l18 18" /></svg>
+                                                </span>
+                                                </a>
+                                                 @else 
+                                                 <a href="/karyawan/{{ $d->nik }}/lockandunlockjamkerja">
+                                                    <span class="badge bg-primary badge-sm">
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#e9e9e9"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" /></svg>
+                                                    </span>
+                                                 </a>  
+                                                
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($d->status_location == 1)
+                                                <a href="/karyawan/{{ $d->nik }}/lockandunlocklocation"> 
+                                                    <span class="badge bg-light badge-sm"> <svg  xmlns="http://www.w3.org/2000/svg"  width="48"  height="48"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.442 9.432a3 3 0 0 0 4.113 4.134m1.445 -2.566a3 3 0 0 0 -3 -3" /><path d="M17.152 17.162l-3.738 3.738a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 0 1 -.476 -10.794m2.18 -1.82a8.003 8.003 0 0 1 10.91 10.912" /><path d="M3 3l18 18" /></svg>
+                                                    </span>
+                                                </a>
+                                                 @else 
+                                                 <a href="/karyawan/{{ $d->nik }}/lockandunlocklocation">
+                                                    <span class="badge bg-primary badge-sm">
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ffffff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /></svg>
+                                                    </span>
+                                                 </a>  
+                                                
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="d-flex">
                                                     <div>
                                                         @role('administrator','user')
-                                                        <a href="#" class="edit btn btn-info btn-sm " nik="{{$d->nik}}" >
+                                                        <a href="/karyawan/{{ sprintf("%08d", $d->nik) }}/setkaryawanprofil" class="detail btn btn-primary btn-sm ml-2"  >
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
                                                         </a>
-                                                  @endrole
-                                                        <a href="/konfigurasi/{{$d->nik}}/setjamkerja" class="S btn btn-success btn-sm ml-2"  >
+                                                         @endrole
+                                                        <a href="/konfigurasi/{{sprintf("%08d", $d->nik) }}/setjamkerja" class="S btn btn-success btn-sm ml-2"  >
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20.982 11.436a9 9 0 1 0 -9.966 9.51" /><path d="M17.8 20.817l-2.172 1.138a.392 .392 0 0 1 -.568 -.41l.415 -2.411l-1.757 -1.707a.389 .389 0 0 1 .217 -.665l2.428 -.352l1.086 -2.193a.392 .392 0 0 1 .702 0l1.086 2.193l2.428 .352a.39 .39 0 0 1 .217 .665l-1.757 1.707l.414 2.41a.39 .39 0 0 1 -.567 .411l-2.172 -1.138z" /><path d="M12 7v5l1 1" /></svg>
                                                             </a>
                                                                 <a href="/karyawan/{{ Crypt::encrypt($d->nik) }}/resetpassword" class="S btn btn-warning btn-sm ml-2"  >
@@ -142,14 +181,16 @@
                                                             </a>
                                                         </div>
                                                         <div>
-                                                        <form action="/karyawan/{{$d->nik}}/delete" method="POST" style="margin-left: 5px">
+                                                        <form action="/karyawan/{{sprintf("%08d", $d->nik) }}/delete" method="POST" style="margin-left: 5px">
                                                         @csrf
                                                         @role('administrator','user')
                                                         <a href="#" class="btn btn-danger btn-sm delete-confirm">
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg> 
                                                         </a>
                                                         @endrole
-                                                        </form>
+                                                      
+                                                               
+                                                        </form> 
                                                     </div>
 
                                                 </div>
@@ -222,17 +263,7 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="input-icon mb-3">
-                        <span class="input-icon-addon">
-                          <!-- Download SVG icon from http://tabler-icons.io/i/user -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg>
-                        </span>
-                        <input type="text" id="no_hp" value="" class="form-control" name="no_hp" placeholder="Nomor HP">
-                      </div>
-                </div>
-            </div>
+    
 
             <div class="row mt-2">
                 <div class="col-12"> 
@@ -241,7 +272,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-                    <select name="kode_dept" id="kode_dept" class="form-select">
+                    <select name="kode_dept" id="kode_dept" class="form-select"> 
                         <option value="">Divisi</option>
                         @foreach ($departemen as $d)
                         <option {{Request('kode_dept')==$d->kode_dept ? 'selected' : '' }} value="{{$d->kode_dept}}">{{$d->nama_dept}}</option>   
@@ -260,6 +291,10 @@
                     </select>
                 </div>
             </div>
+
+            
+
+
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="form-group">
@@ -428,6 +463,28 @@
 
             }
         });
+
+        $(".detail").click(function() {
+                var nik = $(this).attr('nik');
+                $.ajax({
+                    type: 'POST',
+                    url: '/karyawan/edit',
+                    cache: false,
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        nik: nik,
+
+                    },
+                    success: function(respond) {
+                        $("#detailGajiTable").html(
+                        respond); // Isi tabel DETAIL GAJI KARYAWAN SHOW dengan
+                    }
+
+                });
+                $("#detailGajiTable").html(respond);
+            });
+
+        
     });
 </script>
     

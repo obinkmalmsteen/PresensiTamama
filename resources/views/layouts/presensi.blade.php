@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <meta name="viewport"
+    <meta name="viewpophp"
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -25,7 +25,7 @@
             background-color: transparent !important;
             border: 0px !important;
             border-bottom: 1px solid #9e9e9e !important;
-            border-radius:  0 !important;
+            border-radius:  3 !important;
             outline: none !important;
             height: 3rem !important;
             width: 100% !important;
@@ -36,6 +36,18 @@
         }
 
     </style>
+
+<style>
+    .historicontent{
+        display: flex;
+        margin-top: 10px;
+    }
+    .datapresensi{
+        margin-left: 10px;
+    }
+   
+</style>
+
 </head>
 
 <body style="background-color:rgb(248, 246, 246);">

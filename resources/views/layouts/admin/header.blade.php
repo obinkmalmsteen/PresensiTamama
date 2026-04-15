@@ -114,7 +114,7 @@
             
             <a href="./profile.html" class="dropdown-item">Profile</a>
             <a href="./settings.html" class="dropdown-item">Settings</a>
-            <a href="./proseslogoutadmin" class="dropdown-item">Logout</a>
+            <a href="/proseslogoutadmin" class="dropdown-item">Logout</a>
           </div>
         </div>
       </div>

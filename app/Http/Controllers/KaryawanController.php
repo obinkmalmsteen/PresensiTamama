@@ -90,6 +90,22 @@ class KaryawanController extends Controller
        return Redirect::back()->with(['warning'=>'Data gagal disimpan '.$message]);
     }
     }
+
+    public function setkaryawanprofil($nik) 
+    {
+        $cabang = DB::table('cabang')->orderBy('kode_cabang')->get();
+      $karyawan = DB::table('karyawan')->where('nik',$nik)->first();
+      $departemen =DB::table('departemen')->get();
+      $jamkerja = DB::table('jam_kerja')->orderBy('nama_jam_kerja')->get();
+      $cekjamkerja = DB::table('konfigurasi_jamkerja')->where('nik',$nik)->count();
+      $bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+      if($cekjamkerja > 0){
+        $setjamkerja = DB::table('konfigurasi_jamkerja')->where('nik',$nik)->get();
+        return view('karyawan.editsetkaryawanprofil',compact('cabang','departemen','karyawan','jamkerja','setjamkerja','bulan'));
+      }else{
+      return view('karyawan.setkaryawanprofil',compact('cabang','departemen','karyawan','jamkerja','bulan'));
+    }
+  }
     public function edit(Request $request){
         $nik = $request->nik;
         $departemen =DB::table('departemen')->get();
@@ -105,6 +121,26 @@ class KaryawanController extends Controller
         $no_hp = $request->no_hp;
         $kode_cabang = $request->kode_cabang;
         $kode_dept = $request->kode_dept;
+        $alamat_lengkap = $request->alamat_lengkap;
+        $no_ktp = $request->no_ktp;
+        $status_pernikahan  = $request-> status_pernikahan;
+        $kewarganegaraan  = $request-> kewarganegaraan;
+        $agama  = $request-> agama;
+        $tanggungan  = $request->tanggungan ;
+        $pendidikan_terakhir  = $request->pendidikan_terakhir ;
+        $mulai_bekerja  = $request->mulai_bekerja;
+        $tgl_lahir  = $request->tgl_lahir ;
+        $gaji_pokok = $request->gaji_pokok;
+        $tunjangan_jabatan = $request->tunjangan_jabatan;
+        $premi_kehadiran = $request->premi_kehadiran;
+        $tunjangan_komunikasi = $request->tunjangan_komunikasi;
+        $tunjangan_bbm = $request->tunjangan_bbm;
+        $uang_makan = $request->uang_makan;
+        $sewa_motor_mobil = $request->sewa_motor_mobil;
+        $insentif = $request->insentif;
+        $subsidi_bpjs=$request->subsidi_bpjs;
+        $bpjs_kes_kantor=$request->bpjs_kes_kantor;
+        $dana_sosial=$request->dana_sosial;
         $password = Hash::make('123');
         $old_foto = $request->old_foto;
         if($request->hasFile('foto')){
@@ -120,6 +156,26 @@ class KaryawanController extends Controller
             'no_hp'=> $no_hp,
             'kode_cabang'=>$kode_cabang,
             'kode_dept'=>$kode_dept,
+            'alamat_lengkap'=> $alamat_lengkap,
+            'no_ktp'=>$no_ktp,
+            'status_pernikahan'=>$status_pernikahan,
+            'kewarganegaraan'=>$kewarganegaraan,
+            'agama'=>$agama,
+            'tanggungan'=>$tanggungan,
+            'pendidikan_terakhir'=>$pendidikan_terakhir,
+            'mulai_bekerja'=>$mulai_bekerja,
+            'tgl_lahir'=>$tgl_lahir,
+            'gaji_pokok'=>$gaji_pokok,
+            'tunjangan_jabatan'=>$tunjangan_jabatan,
+            'premi_kehadiran'=>$premi_kehadiran,
+            'subsidi_bpjs'=>$subsidi_bpjs,
+            'tunjangan_komunikasi'=>$tunjangan_komunikasi,
+            'tunjangan_bbm'=>$tunjangan_bbm,
+            'uang_makan'=>$uang_makan,
+            'sewa_motor_mobil'=>$sewa_motor_mobil,
+            'insentif'=>$insentif,
+            'bpjs_kes_kantor'=>$bpjs_kes_kantor,
+            'dana_sosial'=>$dana_sosial,
             'foto'=>$foto,
             'password'=>$password
         ];
@@ -165,4 +221,45 @@ class KaryawanController extends Controller
 
 
     }
+
+    public function lockandunlocklocation($nik){
+        try {
+            $karyawan = DB::table('karyawan')->where('nik',$nik)->first();
+            $status_location = $karyawan->status_location;
+            if($status_location == '1') {
+                DB::table('karyawan')->where('nik',$nik)->update([          
+            'status_location' => '0'
+                ]);
+            }else{
+                DB::table('karyawan')->where('nik',$nik)->update([          
+                    'status_location' => '1'
+                        ]);
+            }
+            return Redirect::back()->with(['success'=>'Status Location berhasil di Update']);
+        } catch (\Exception $e) {
+            return Redirect::back()->with(['warning'=>'Status Location gagal di Update']);
+        }
+    }
+
+    public function lockandunlockjamkerja($nik){
+        try {
+            $karyawan = DB::table('karyawan')->where('nik',$nik)->first();
+            $status_jam_kerja = $karyawan->status_jam_kerja;
+            if($status_jam_kerja == '1') {
+                DB::table('karyawan')->where('nik',$nik)->update([          
+            'status_jam_kerja' => '0'
+                ]);
+            }else{
+                DB::table('karyawan')->where('nik',$nik)->update([          
+                    'status_jam_kerja' => '1'
+                        ]);
+            }
+            return Redirect::back()->with(['success'=>'Status Jam Kerja berhasil di Update']);
+        } catch (\Exception $e) {
+            return Redirect::back()->with(['warning'=>'Status Jam Kerja gagal di Update']);
+        }
+    }
+
+    
+
 }

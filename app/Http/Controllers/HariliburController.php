@@ -6,6 +6,7 @@ use App\Models\Harilibur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\HariMinggu;
 
 class HariliburController extends Controller
 {
@@ -103,14 +104,86 @@ class HariliburController extends Controller
 
    public function setlistkaryawanlibur($kode_libur)
    {
-    $harilibur = DB::table('harilibur')->where('kode_libur',$kode_libur)->first();
-    $karyawan = DB::table('karyawan')->where('kode_cabang',$harilibur->kode_cabang)
-    ->orderBy('nama_lengkap')
-    ->get();
+   // $harilibur = DB::table('harilibur')->where('kode_libur',$kode_libur)->first();
+   // $karyawan = DB::table('karyawan')->where('kode_cabang',$harilibur->kode_cabang)
+  //  ->orderBy('nama_lengkap')
+   // ->get();
 
 
-    return view('harilibur.setlistkaryawanlibur', compact('karyawan'));
+    return view('harilibur.setlistkaryawanlibur', compact('kode_libur'));
 
    }
+
+   public function getsetlistkaryawanlibur($kode_libur)
+   {
+    $harilibur = DB::table('harilibur')->where('kode_libur',$kode_libur)->first();
+    $karyawan = DB::table('karyawan')
+        ->select('karyawan.*','hariliburdetail.nik as ceknik')
+        ->leftjoin(
+            DB::raw("(
+                SELECT nik FROM harilibur_detail
+                WHERE kode_libur = '$kode_libur'
+            ) hariliburdetail"),
+                function($join){
+                    $join->on('karyawan.nik', '=' ,'hariliburdetail.nik');
+                }
+            )
+        ->where('kode_cabang',$harilibur->kode_cabang)
+        ->orderBy('nama_lengkap')
+        ->get();
+    return view('harilibur.getsetlistkaryawanlibur',compact('karyawan','kode_libur'));
+   }
+
+
+   public function storekaryawanlibur(Request $request){
+    try {
+        $cek = DB::table('harilibur_detail')
+            ->where('kode_libur', $request->kode_libur)
+            ->where('nik', $request->nik)
+            ->count();
+        if ($cek > 0) {
+            return response()->json(['status' => 'warning', 'message' => 'Data Sudah Ada'], 200);
+        }
+        DB::table('harilibur_detail')->insert([
+            'kode_libur' => $request->kode_libur,
+            'nik' => $request->nik 
+        ]);
+        return response()->json(['status' => 'success', 'message' => 'Data Berhasil Ditambahkan'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['status' => 'ngeerrorstore', 'message' => 'Data Gagal Ditambahkan: ' . $e->getMessage()], 500);
+    }
+}
+
+
+public function removekaryawanlibur(Request $request)
+{
+    try {
+       
+        DB::table('harilibur_detail')
+        ->where('kode_libur',$request->kode_libur)
+        ->where('nik',$request->nik)
+        ->delete();
+        
+        return response()->json(['status' => 'success', 'message' => 'Data Berhasil Dikurangkan'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['status' => 'ngeerrorremove', 'message' => 'Data Gagal Dikurangkan ' . $e->getMessage()], 500);
+    }
+
+}
+
+
+public function getkaryawanlibur($kode_libur){
+    $karyawanlibur = DB::table('harilibur_detail')
+    ->join('karyawan','harilibur_detail.nik', '=' ,'karyawan.nik')
+    ->where('kode_libur',$kode_libur)
+    ->get();
+
+    return view('harilibur.getkaryawanlibur', compact('karyawanlibur','kode_libur'));
+}
+
+
+
+
+
 
 }

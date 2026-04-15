@@ -219,8 +219,8 @@
                  text: "Data sudah terhapus.",
                 icon: "success"
             });
-    }
-});
+            }
+        });
 
         });
 

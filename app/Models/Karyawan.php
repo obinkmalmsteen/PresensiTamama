@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,11 +13,37 @@ class Karyawan extends Authenticatable
 
     protected $table = "karyawan";
     protected $primaryKey = "nik";
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'nik',
         'nama_lengkap',
         'jabatan',
         'no_hp',
+        'kode_cabang',
+        'kode_dept',
+        'alamat_lengkap',
+        'no_ktp',
+        'status_pernikahan',
+        'kewarganegaraan',
+        'agama',
+        'tanggungan',
+        'pendidikan_terakhir',
+        'mulai_bekerja',
+        'tgl_lahir',
+        'gaji_pokok',
+        'tunjangan_jabatan',
+        'premi_kehadiran',
+        'subsidi_bpjs',
+        'tunjangan_komunikasi',
+        'tunjangan_bbm',
+        'uang_makan',
+        'sewa_motor_mobil',
+        'insentif',
+        'bpjs_kes_kantor',
+        'dana_sosial',
+        'foto',
         'password',
     ];
 
@@ -27,11 +52,6 @@ class Karyawan extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
