@@ -91,11 +91,18 @@
         <table class="tabeldatakaryawan">
             <tr>
                 <td rowspan="5">
-                    @php
-                        $path = Storage::url('uploads/karyawan/' . $karyawan->foto);
-                    @endphp
-                    <img src="{{ url($path) }}" alt="" width="80px" height="100px">
-                </td>
+    @if ($karyawan->foto && file_exists(public_path('uploads/karyawan/' . $karyawan->foto)))
+        <img src="{{ asset('uploads/karyawan/' . $karyawan->foto) }}"
+             alt=""
+             width="80px"
+             height="100px">
+    @else
+        <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}"
+             alt=""
+             width="80px"
+             height="100px">
+    @endif
+</td>
             </tr>
             <tr>
                 <td>NIK</td>
