@@ -118,17 +118,17 @@
 
                     <div id="user-detail">
                         <div class="avatar">
-                            @if (!empty(Auth::guard('karyawan')->user()->foto))
-                                @php
-                                    $path = Storage::url('uploads/karyawan/' . Auth::guard('karyawan')->user()->foto);
-                                @endphp
-                                <img src="{{ url($path) }}" alt="avatar" class="imaged w64"
-                                    style="height:60px; border-radius: 100%;">
-                            @else
-                                <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
-                            @endif
-
-                        </div>
+    @if (!empty(Auth::guard('karyawan')->user()->foto))
+        <img src="{{ asset('uploads/karyawan/' . Auth::guard('karyawan')->user()->foto) }}"
+            alt="avatar"
+            class="imaged w64"
+            style="height:60px; border-radius:100%;">
+    @else
+        <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}"
+            alt="avatar"
+            class="imaged w64 rounded">
+    @endif
+</div>
                         <div id="user-info">
                             <h3 id="user-name">{{ Auth::guard('karyawan')->user()->nama_lengkap }}</h3>
                             <span id="user-role">{{ Auth::guard('karyawan')->user()->jabatan }}</span>
