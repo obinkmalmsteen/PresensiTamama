@@ -111,8 +111,8 @@
                                     <tbody>
                                         @foreach ($karyawan as $d)
                                         @php
-                                            $path = Storage::url('uploads/karyawan/'.$d->foto);
-                                        @endphp
+    $path = asset('uploads/karyawan/'.$d->foto);
+@endphp
                                         <tr>
                                             <td>{{ $loop->iteration + $karyawan->firstItem()-1 }}</td>
                                             <td>{{ sprintf("%08d", $d->nik) }}</td>

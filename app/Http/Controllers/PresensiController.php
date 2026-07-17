@@ -975,7 +975,7 @@ public function deleteizin($kode_izin)
         try {
         DB::table('pengajuan_izin')->where('kode_izin',$kode_izin)->delete();
         if($doc_sid != null){
-            Storage::delete('/public/uploads/sid/' . $doc_sid);
+            Storage::delete('/uploads/sid/' . $doc_sid);
         }
         return redirect('/presensi/izin')->with(['success'=>'Data Berhasil Dihapus']);
     } catch (\Exception $e) {
