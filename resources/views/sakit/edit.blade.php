@@ -43,7 +43,7 @@
 
                @if ($dataizin->doc_sid != null)
     <div class="col-12">
-        <img src="{{ asset('uploads/sid/'.$dataizin->doc_sid) }}" alt="" width="200px">
+        <img src="{{ asset('public/uploads/sid/'.$dataizin->doc_sid) }}" alt="" width="200px">
     </div>
 @endif
 

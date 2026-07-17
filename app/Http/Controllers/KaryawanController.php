@@ -76,7 +76,7 @@ class KaryawanController extends Controller
         $simpan = DB::table('karyawan')->insert($data);
         if($simpan){
             if($request->hasFile('foto')){
-                $folderPath = "uploads/karyawan/";
+                $folderPath = "public/uploads/karyawan/";
                 $request->file('foto')->storeAs($folderPath, $foto);
             }
             return Redirect::back()->with(['success'=>'Data berhasil disimpan']);
@@ -182,8 +182,8 @@ class KaryawanController extends Controller
         $update = DB::table('karyawan')->where('nik', $nik)->update($data);
         if($update){
             if($request->hasFile('foto')){
-                $folderPath = "uploads/karyawan/";
-                $folderPathOld = "uploads/karyawan/". $old_foto;
+                $folderPath = "public/uploads/karyawan/";
+                $folderPathOld = "public/uploads/karyawan/". $old_foto;
                 Storage::delete($folderPathOld);
                 $request->file('foto')->storeAs($folderPath, $foto);
             }

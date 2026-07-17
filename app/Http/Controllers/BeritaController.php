@@ -40,7 +40,7 @@ class BeritaController extends Controller
         $simpan = DB::table('berita')->insert($data);
         if($simpan){
             if($request->hasFile('gambar')){
-                $folderPath = "uploads/gambar/";
+                $folderPath = "public/uploads/gambar/";
                 $request->file('gambar')->storeAs($folderPath, $gambar);
             }
             return Redirect::back()->with(['success'=>'Data berhasil disimpan']);
@@ -89,8 +89,8 @@ class BeritaController extends Controller
         $update = DB::table('berita')->where('kode_berita', $kode_berita)->update($data);
         if($update){
             if($request->hasFile('gambar')){
-                $folderPath = "uploads/gambar/";
-                $folderPathOld = "uploads/gambar/". $old_foto;
+                $folderPath = "public/uploads/gambar/";
+                $folderPathOld = "public/uploads/gambar/". $old_foto;
                 Storage::delete($folderPathOld);
                 $request->file('gambar')->storeAs($folderPath, $gambar);
             }

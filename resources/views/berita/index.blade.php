@@ -100,7 +100,7 @@
             @if (empty($d->gambar))
                 <img src="{{ asset('assets/img/nophoto.png') }}" class="avatar" alt="">
             @else
-                <img src="{{ asset('uploads/gambar/'.$d->gambar) }}" class="avatar" alt="">
+                <img src="{{ asset('public/uploads/gambar/'.$d->gambar) }}" class="avatar" alt="">
             @endif
         </td>
                                             <td>

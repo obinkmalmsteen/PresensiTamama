@@ -203,7 +203,7 @@ class PresensiController extends Controller
         }
     
         $image = $request->image;
-        $folderPath = "uploads/absensi/";
+        $folderPath = "public/uploads/absensi/";
         $formatName = $nik . "-" . $tgl_presensi . "-" . $ket;
         $image_parts = explode(";base64", $image);
         $image_base64 = base64_decode($image_parts[1]);
@@ -233,7 +233,7 @@ class PresensiController extends Controller
                     $update = DB::table('presensi')->where('tgl_presensi',$tgl_presensi)->where('nik', $nik)->update($data_pulang);
                    if ($update) {
 
-    $folder = public_path('uploads/absensi');
+    $folder = public_path('public/uploads/absensi');
 
     // Buat folder jika belum ada
     if (!file_exists($folder)) {
@@ -282,7 +282,7 @@ class PresensiController extends Controller
                     $simpan = DB::table('presensi')->insert($data);
                    if ($simpan) {
 
-    $folder = public_path('uploads/absensi');
+    $folder = public_path('public/uploads/absensi');
 
     // Buat folder jika belum ada
     if (!file_exists($folder)) {
@@ -359,7 +359,7 @@ if(empty($request ->password)){
     $update = DB::table('karyawan')->where('nik', $nik)->update($data);
     if($update){
         if($request->hasFile('foto')){
-            $folderPath ="uploads/karyawan/";
+            $folderPath ="public/uploads/karyawan/";
             $request->file('foto')->storeAs($folderPath, $foto);
         }
         return Redirect::back()->with(['success' => 'Data Berhasil Di Update']);
@@ -975,7 +975,7 @@ public function deleteizin($kode_izin)
         try {
         DB::table('pengajuan_izin')->where('kode_izin',$kode_izin)->delete();
         if($doc_sid != null){
-            Storage::delete('/uploads/sid/' . $doc_sid);
+            Storage::delete('/public/uploads/sid/' . $doc_sid);
         }
         return redirect('/presensi/izin')->with(['success'=>'Data Berhasil Dihapus']);
     } catch (\Exception $e) {
