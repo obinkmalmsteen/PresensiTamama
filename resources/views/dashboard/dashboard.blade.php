@@ -186,7 +186,7 @@
                                     <div class="iconpresence">
                                         @if ($presensihariini != null)
                                             @if ($presensihariini->foto_in != null)
-                                                <img src="{{ asset('uploads/absensi/' . $presensihariini->foto_in) }}"
+                                                <img src="{{ asset('public/uploads/absensi/' . $presensihariini->foto_in) }}"
                                                     alt="" class="imaged w48">
                                             @else
                                                 <ion-icon name="camera"></ion-icon>
