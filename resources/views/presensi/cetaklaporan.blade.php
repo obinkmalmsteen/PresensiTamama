@@ -146,8 +146,8 @@
             @foreach ($presensi as $d)
                 @if ($d->status == 'h')
                     @php
-                        $path_in = Storage::url('uploads/absensi/' . $d->foto_in);
-                        $path_out = Storage::url('uploads/absensi/' . $d->foto_out);
+                         $path_in = asset('uploads/absensi/' . $d->foto_in);
+    $path_out = asset('uploads/absensi/' . $d->foto_out);
                         $terlambat = hitungjamterlambat($d->jam_masuk, $d->jam_in);
                         $terlambat_desimal = hitungjamterlambatdesimal($d->jam_masuk, $d->jam_in);
                         $j_terlambat = explode(":", $terlambat);

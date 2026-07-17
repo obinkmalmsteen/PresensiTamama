@@ -41,14 +41,11 @@
                 <input type="text" id="jml_hari"  name="jml_hari" class="form-control " autocomplete="off"  placeholder="Jumlah Hari" readonly>
             </div>
 
-                @if ($dataizin->doc_sid != null)
-                    <div class="col-12">
-                        @php
-                            $docsid = Storage::url('/uploads/sid/'.$dataizin->doc_sid);
-                        @endphp
-                        <img src="{{url($docsid)}}" alt="" width="200px">
-                    </div>
-                @endif
+               @if ($dataizin->doc_sid != null)
+    <div class="col-12">
+        <img src="{{ asset('uploads/sid/'.$dataizin->doc_sid) }}" alt="" width="200px">
+    </div>
+@endif
 
             <div class="custom-file-upload" id="fileUpload1" style="height: 100px !important">
                 <input type="file" name="sid" id="fileuploadInput" accept=".png, .jpg, .jpeg">

@@ -47,12 +47,12 @@
                         <div class="col-md-3 bg-custom-gray" style="height: 600px;">
                             <div class="card-header bg-custom-gray text-center align-items-center">
                                 <ul class="nav nav-pills flex-column card-header-tabs bg-custom-gray" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        @php
-                                            $path = Storage::url('uploads/karyawan/' . $karyawan->foto);
-                                        @endphp
-                                        <img src="{{ url($path) }}" alt="" width="135px" height="180px">
-                                    </li>
+                                   <li class="nav-item" role="presentation">
+    <img src="{{ asset('uploads/karyawan/' . $karyawan->foto) }}"
+         alt=""
+         width="135px"
+         height="180px">
+</li>
                                     <br>
                                     <li class="nav-item" role="presentation">
                                         <a href="#tab01" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">

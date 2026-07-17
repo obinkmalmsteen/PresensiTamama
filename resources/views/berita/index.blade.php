@@ -86,23 +86,23 @@
                                     </style>
                                    
                                     <tbody>
+
+
                                         @foreach ($berita as $d)
-                                        @php
-                                        $path = Storage::url('uploads/gambar/'.$d->gambar);
-                                    @endphp
+                                       
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$d->kode_berita}}</td>
                                             <td>{{ date('d-M-Y', strtotime($d->tanggal_berita)) }}</td>
                                             <td>{{$d->nama_berita}}</td>
                                             <td>{{$d->isi_berita}}</td>
-                                            <td>
-                                                @if (empty($d->gambar))
-                                                    <img src="{{asset('assets/img/nophoto.png')}}"class="avatar" alt="">
-                                                @else
-                                                <img src="{{url($path)}}" class="avatar" alt="">
-                                                @endif
-                                            </td>
+                                             <td>
+            @if (empty($d->gambar))
+                <img src="{{ asset('assets/img/nophoto.png') }}" class="avatar" alt="">
+            @else
+                <img src="{{ asset('uploads/gambar/'.$d->gambar) }}" class="avatar" alt="">
+            @endif
+        </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="#" class="edit btn btn-info btn-sm " kode_berita="{{$d->kode_berita}}" >

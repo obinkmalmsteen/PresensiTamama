@@ -231,12 +231,23 @@ class PresensiController extends Controller
                         'lokasi_out' =>$lokasi
                     ];
                     $update = DB::table('presensi')->where('tgl_presensi',$tgl_presensi)->where('nik', $nik)->update($data_pulang);
-                    if ($update) {
-                        echo "sukses|Terimakasih, Hati-hati di jalan|keluar";
-                        Storage::put($file,$image_base64);
-                    } else {
-                        echo "error|Maaf Gagal Absen, Hub Tim IT|keluar";
-                    }
+                   if ($update) {
+
+    $folder = public_path('uploads/absensi');
+
+    // Buat folder jika belum ada
+    if (!file_exists($folder)) {
+        mkdir($folder, 0755, true);
+    }
+
+    // Simpan file
+    file_put_contents($folder . '/' . $fileName, $image_base64);
+
+    echo "sukses|Terimakasih, Hati-hati di jalan|keluar";
+
+} else {
+    echo "error|Maaf Gagal Absen, Hub Tim IT|keluar";
+}
                 }
             } else {
                 if($jam < $jamkerja->awal_jam_masuk){
@@ -269,12 +280,23 @@ class PresensiController extends Controller
                         'terlambat' => $point
                     ];
                     $simpan = DB::table('presensi')->insert($data);
-                    if ($simpan) {
-                        echo "sukses|Terimakasih, Selamat Bekerja |masuk";
-                        Storage::put($file,$image_base64);
-                    } else {
-                        echo "error|Maaf Gagal Absen, Hub Tim IT|masuk";
-                    }
+                   if ($simpan) {
+
+    $folder = public_path('uploads/absensi');
+
+    // Buat folder jika belum ada
+    if (!file_exists($folder)) {
+        mkdir($folder, 0755, true);
+    }
+
+    // Simpan foto
+    file_put_contents($folder . '/' . $fileName, $image_base64);
+
+    echo "sukses|Terimakasih, Selamat Bekerja|masuk";
+
+} else {
+    echo "error|Maaf Gagal Absen, Hub Tim IT|masuk";
+}
                 }
             }
         }

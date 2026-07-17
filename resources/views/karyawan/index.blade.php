@@ -114,24 +114,19 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($karyawan as $d)
-                                        @php
-                                   
-
-                                            $path = Storage::url('uploads/karyawan/'.$d->foto);
-                                        @endphp
-                                        <tr>
-                                            <td>{{ $loop->iteration + $karyawan->firstItem()-1 }}</td>
-                                            <td>{{ sprintf("%08d", $d->nik) }}</td>
-                                            <td>{{$d->nama_lengkap}}</td>
-                                            <td>{{$d->jabatan}}</td>
-                                            <td>{{$d->no_hp}}</td>
-                                            <td>
-                                                @if (empty($d->foto))
-                                                    <img src="{{asset('assets/img/nophoto.png')}}"class="avatar" alt="">
-                                                @else
-                                                <img src="{{url($path)}}" class="avatar" alt="">
-                                                @endif
-                                            </td>
+                                       <tr>
+    <td>{{ $loop->iteration + $karyawan->firstItem() - 1 }}</td>
+    <td>{{ sprintf("%08d", $d->nik) }}</td>
+    <td>{{ $d->nama_lengkap }}</td>
+    <td>{{ $d->jabatan }}</td>
+    <td>{{ $d->no_hp }}</td>
+    <td>
+        @if (empty($d->foto))
+            <img src="{{ asset('assets/img/nophoto.png') }}" class="avatar" alt="">
+        @else
+            <img src="{{ asset('uploads/karyawan/'.$d->foto) }}" class="avatar" alt="">
+        @endif
+    </td>
                                             <td>{{$d->kode_cabang}}</td>
                                             <td>{{$d->nama_dept}}</td>
                                             <td class="text-center">

@@ -9,19 +9,20 @@
 @section('content')
     <style>
         /* .logout{
-                        position: absolute;
-                        color: white;
-                        font-size:30px;
-                        text-decoration: none;
-                        right: 8px;
-                    }
-                    .logout:hover{
-                        color:white;
-                    } */
+                            position: absolute;
+                            color: white;
+                            font-size:30px;
+                            text-decoration: none;
+                            right: 8px;
+                        }
+                        .logout:hover{
+                            color:white;
+                        } */
         #presence-section {
             position: absolute;
-            top: 180px; /*obink Atur jarak ke atas yang bersifat absolut sesuai dengan kebutuhan Anda */
-           
+            top: 180px;
+            /*obink Atur jarak ke atas yang bersifat absolut sesuai dengan kebutuhan Anda */
+
         }
 
         .swiper-container {
@@ -89,8 +90,9 @@
         }
 
         #menu-section {
-            height: 150px; /*obink Atur ukuran tinggi menu-section (kolom Berita) */
-            
+            height: 150px;
+            /*obink Atur ukuran tinggi menu-section (kolom Berita) */
+
             overflow: auto;
             /* Tambahkan overflow: auto; jika konten melebihi tinggi yang ditetapkan */
         }
@@ -118,17 +120,14 @@
 
                     <div id="user-detail">
                         <div class="avatar">
-    @if (!empty(Auth::guard('karyawan')->user()->foto))
-        <img src="{{ asset('uploads/karyawan/' . Auth::guard('karyawan')->user()->foto) }}"
-            alt="avatar"
-            class="imaged w64"
-            style="height:60px; border-radius:100%;">
-    @else
-        <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}"
-            alt="avatar"
-            class="imaged w64 rounded">
-    @endif
-</div>
+                            @if (!empty(Auth::guard('karyawan')->user()->foto))
+                                <img src="{{ asset('uploads/karyawan/' . Auth::guard('karyawan')->user()->foto) }}"
+                                    alt="avatar" class="imaged w64" style="height:60px; border-radius:100%;">
+                            @else
+                                <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar"
+                                    class="imaged w64 rounded">
+                            @endif
+                        </div>
                         <div id="user-info">
                             <h3 id="user-name">{{ Auth::guard('karyawan')->user()->nama_lengkap }}</h3>
                             <span id="user-role">{{ Auth::guard('karyawan')->user()->jabatan }}</span>
@@ -141,9 +140,9 @@
                 <div class="col-2">
                     <div id="user-detail">
                         <div class="avatar">
-                          
-                                <img src="assets/img/logo_koperasi.png" alt="avatar" class="imaged w64 rounded">
-                          
+
+                            <img src="assets/img/logo_koperasi.png" alt="avatar" class="imaged w64 rounded">
+
 
                         </div>
 
@@ -156,7 +155,7 @@
 
 
         </div>
-{{-- obink background buat berita:  style="background-image: url('{{ asset('storage/uploads/gambar/' . $berita->gambar) }}');"> --}}
+        {{-- obink background buat berita:  style="background-image: url('{{ asset('storage/uploads/gambar/' . $berita->gambar) }}');"> --}}
 
         <div class="section" id="menu-section">
             <div class="swiper-container">
@@ -187,13 +186,8 @@
                                     <div class="iconpresence">
                                         @if ($presensihariini != null)
                                             @if ($presensihariini->foto_in != null)
-                                                @php
-
-                                                    $path = Storage::url(
-                                                        'uploads/absensi/' . $presensihariini->foto_in,
-                                                    );
-                                                @endphp
-                                                <img src="{{ url($path) }}" alt="" class="imaged w48 ">
+                                                <img src="{{ asset('uploads/absensi/' . $presensihariini->foto_in) }}"
+                                                    alt="" class="imaged w48">
                                             @else
                                                 <ion-icon name="camera"></ion-icon>
                                             @endif
@@ -216,20 +210,15 @@
                             <div class="card-body">
                                 <div class="presencecontent">
                                     <div class="iconpresence">
-                                        @if ($presensihariini != null)
-                                            @if ($presensihariini->foto_out != null)
-                                                @php
-                                                    $path = Storage::url(
-                                                        'uploads/absensi/' . $presensihariini->foto_out,
-                                                    );
-                                                @endphp
-                                                <img src="{{ url($path) }}" alt="" class="imaged w48 ">
-                                            @else
-                                                <ion-icon name="camera"></ion-icon>
-                                            @endif
-                                        @else
-                                            <ion-icon name="camera"></ion-icon>
-                                        @endif
+                                       @if (optional($presensihariini)->foto_out)
+    <img src="{{ asset('uploads/absensi/' . $presensihariini->foto_out) }}"
+         alt=""
+         class="imaged w48">
+@else
+    <ion-icon name="camera"></ion-icon>
+@endif
+
+
 
                                     </div>
                                     <div class="presencedetail">
@@ -317,26 +306,26 @@
                     <div class="tab-content mt-2" style="margin-bottom:100px;">
                         <div class="tab-pane fade show active" id="home" role="tabpanel">
                             <!---
-                                    <ul class="listview image-listview">
-                                        @foreach ($historibulanini as $d)
+                                        <ul class="listview image-listview">
+                                            @foreach ($historibulanini as $d)
     @php
-        $path = Storage::url('uploads/absensi/' . $d->foto_in);
+        $path = asset('uploads/absensi/' . $d->foto_in);
     @endphp
-                                        <li>
-                                            <div class="item">
-                                                <div class="icon-box bg-primary">
-                                                   <ion-icon name="finger-print-outline"></ion-icon>
+                                            <li>
+                                                <div class="item">
+                                                    <div class="icon-box bg-primary">
+                                                       <ion-icon name="finger-print-outline"></ion-icon>
+                                                    </div>
+                                                    <div class="in">
+                                                        <div>{{ date('d-m-Y', strtotime($d->tgl_presensi)) }}</div>
+                                                        <span class="badge badge-success">{{ $d->jam_in }}</span>
+                                                        <span class="badge badge-danger">{{ $presensihariini != null && $d->jam_out != null ? $d->jam_out : 'Belum Absen' }}</span>
+                                                    </div>
                                                 </div>
-                                                <div class="in">
-                                                    <div>{{ date('d-m-Y', strtotime($d->tgl_presensi)) }}</div>
-                                                    <span class="badge badge-success">{{ $d->jam_in }}</span>
-                                                    <span class="badge badge-danger">{{ $presensihariini != null && $d->jam_out != null ? $d->jam_out : 'Belum Absen' }}</span>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
     @endforeach
-                                    </ul>
-                                    --->
+                                        </ul>
+                                        --->
                             <style>
                                 .historicontent {
                                     display: flex;
