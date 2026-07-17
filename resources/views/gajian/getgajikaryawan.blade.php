@@ -111,7 +111,7 @@
                                     <tbody>
                                         @foreach ($karyawan as $d)
                                         @php
-    $path = asset('uploads/karyawan/'.$d->foto);
+    $path = asset('public/uploads/karyawan/'.$d->foto);
 @endphp
                                         <tr>
                                             <td>{{ $loop->iteration + $karyawan->firstItem()-1 }}</td>

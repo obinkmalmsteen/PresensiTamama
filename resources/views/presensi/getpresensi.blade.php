@@ -16,8 +16,8 @@
 ?>
 @foreach ($presensi as $d)
 @php
-    $foto_in = asset('uploads/absensi/'.$d->foto_in);
-    $foto_out = asset('uploads/absensi/'.$d->foto_out);
+    $foto_in = asset('public/uploads/absensi/'.$d->foto_in);
+    $foto_out = asset('public/uploads/absensi/'.$d->foto_out);
 @endphp
 @if ($d->status=="h")
 <tr>

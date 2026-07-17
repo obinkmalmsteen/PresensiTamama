@@ -91,8 +91,8 @@
         <table class="tabeldatakaryawan">
             <tr>
                 <td rowspan="5">
-    @if ($karyawan->foto && file_exists(public_path('uploads/karyawan/' . $karyawan->foto)))
-        <img src="{{ asset('uploads/karyawan/' . $karyawan->foto) }}"
+    @if ($karyawan->foto && file_exists(public_path('public/uploads/karyawan/' . $karyawan->foto)))
+        <img src="{{ asset('public/uploads/karyawan/' . $karyawan->foto) }}"
              alt=""
              width="80px"
              height="100px">
@@ -146,8 +146,8 @@
             @foreach ($presensi as $d)
                 @if ($d->status == 'h')
                     @php
-                         $path_in = asset('uploads/absensi/' . $d->foto_in);
-    $path_out = asset('uploads/absensi/' . $d->foto_out);
+                         $path_in = asset('public/uploads/absensi/' . $d->foto_in);
+    $path_out = asset('public/uploads/absensi/' . $d->foto_out);
                         $terlambat = hitungjamterlambat($d->jam_masuk, $d->jam_in);
                         $terlambat_desimal = hitungjamterlambatdesimal($d->jam_masuk, $d->jam_in);
                         $j_terlambat = explode(":", $terlambat);

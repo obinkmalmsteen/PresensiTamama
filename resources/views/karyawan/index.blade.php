@@ -124,7 +124,7 @@
         @if (empty($d->foto))
             <img src="{{ asset('assets/img/nophoto.png') }}" class="avatar" alt="">
         @else
-            <img src="{{ asset('uploads/karyawan/'.$d->foto) }}" class="avatar" alt="">
+            <img src="{{ asset('public/uploads/karyawan/'.$d->foto) }}" class="avatar" alt="">
         @endif
     </td>
                                             <td>{{$d->kode_cabang}}</td>

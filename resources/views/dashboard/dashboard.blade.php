@@ -121,7 +121,7 @@
                     <div id="user-detail">
                         <div class="avatar">
                             @if (!empty(Auth::guard('karyawan')->user()->foto))
-                                <img src="{{ asset('uploads/karyawan/' . Auth::guard('karyawan')->user()->foto) }}"
+                                <img src="{{ asset('public/uploads/karyawan/' . Auth::guard('karyawan')->user()->foto) }}"
                                     alt="avatar" class="imaged w64" style="height:60px; border-radius:100%;">
                             @else
                                 <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar"

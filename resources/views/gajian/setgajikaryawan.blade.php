@@ -54,7 +54,7 @@
                                 <div class="card-header bg-custom-gray text-center align-items-center">
                                     <ul class="nav nav-pills flex-column card-header-tabs bg-custom-gray" role="tablist">
                                         <li class="nav-item" role="presentation">
-    <img src="{{ asset('uploads/karyawan/' . $karyawan->foto) }}"
+    <img src="{{ asset('public/uploads/karyawan/' . $karyawan->foto) }}"
          alt=""
          width="135px"
          height="180px">
