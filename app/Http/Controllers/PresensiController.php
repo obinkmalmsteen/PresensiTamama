@@ -359,7 +359,7 @@ if(empty($request ->password)){
     $update = DB::table('karyawan')->where('nik', $nik)->update($data);
     if($update){
         if($request->hasFile('foto')){
-            $folderPath ="public/uploads/karyawan/";
+            $folderPath ="uploads/karyawan/";
             $request->file('foto')->storeAs($folderPath, $foto);
         }
         return Redirect::back()->with(['success' => 'Data Berhasil Di Update']);

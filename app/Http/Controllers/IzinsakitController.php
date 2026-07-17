@@ -74,7 +74,7 @@ class IzinsakitController extends Controller
        if($simpan){
         if ($request->hasFile('sid')){
             $sid = $kode_izin.".". $request->file('sid')->getClientOriginalExtension();
-            $folderPath ="public/uploads/sid/";
+            $folderPath ="uploads/sid/";
             $request->file('sid')->storeAs($folderPath, $sid);
            };
            return redirect('/presensi/izin')->with(['success'=>'Data Berhasil Disimpan']);
@@ -117,7 +117,7 @@ try {
     ->update($data);
     if ($request->hasFile('sid')){
         $sid = $kode_izin.".". $request->file('sid')->getClientOriginalExtension();
-        $folderPath ="public/uploads/sid/";
+        $folderPath ="uploads/sid/";
         $request->file('sid')->storeAs($folderPath, $sid);
        }
        return redirect('/presensi/izin')->with(['success'=>'Data Berhasil Diupdate']);
