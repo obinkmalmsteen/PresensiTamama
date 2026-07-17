@@ -211,7 +211,7 @@
                                 <div class="presencecontent">
                                     <div class="iconpresence">
                                        @if (optional($presensihariini)->foto_out)
-    <img src="{{ asset('uploads/absensi/' . $presensihariini->foto_out) }}"
+    <img src="{{ asset('public/uploads/absensi/' . $presensihariini->foto_out) }}"
          alt=""
          class="imaged w48">
 @else
@@ -309,7 +309,7 @@
                                         <ul class="listview image-listview">
                                             @foreach ($historibulanini as $d)
     @php
-        $path = asset('uploads/absensi/' . $d->foto_in);
+        $path = asset('public/uploads/absensi/' . $d->foto_in);
     @endphp
                                             <li>
                                                 <div class="item">
